@@ -11,7 +11,9 @@ class LoginPage(BasePage):
     
     def login(self, user, password):
         self.click(self.locators.HREF_LOGIN_PAGE, 5)
+        time.sleep(3)
         self.click(self.locators.HREF_MAIL_LOGIN_PAGE, 5)
+        time.sleep(3)
         login_input = self.find(self.locators.LOGIN_INPUT)
         # login_input.clear()
         login_input.send_keys(user)
@@ -24,4 +26,4 @@ class LoginPage(BasePage):
         time.sleep(4)
 
         password_input.send_keys(Keys.ENTER)
-        self.click(self.locators.SUBMIT_BUTTON, 5)        
+        # self.click(self.locators.SUBMIT_BUTTON, 5)        

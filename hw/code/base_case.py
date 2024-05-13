@@ -4,6 +4,8 @@ from ui.pages.base_page import PageNotOpenedException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from ui.pages.login_page import LoginPage
+from dotenv import load_dotenv
+import os
 
 class BaseCase:
     authorize = True

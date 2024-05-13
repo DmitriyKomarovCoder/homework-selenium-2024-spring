@@ -10,6 +10,7 @@ from ui.pages.navbar_page import NavbarPage
 from dotenv import load_dotenv
 import os
 
+
 @pytest.fixture()
 def driver(config):
     browser = config['browser']
