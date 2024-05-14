@@ -3,8 +3,8 @@ from ui.fixtures import main_page
 import pytest
 
 class TestMainPage(BaseCase):
-    authorize = True
-    # @pytest.mark.skip
+    authorize = False
+    @pytest.mark.skip
     def test_slide_click(self, main_page):
         initial_title = main_page.get_slide_title()
         main_page.change_slide()

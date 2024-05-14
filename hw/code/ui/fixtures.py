@@ -6,6 +6,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
 from ui.pages.navbar_page import NavbarPage
+from ui.pages.pixel_page import PixelPage
 # from ui.pages.settings_page import SettingsPage
 from dotenv import load_dotenv
 import os
@@ -18,8 +19,8 @@ def driver(config):
     selenoid = config['selenoid']
     vnc = config['vnc']
     options = Options()
-    # options = webdriver.ChromeOptions()
-    # options.add_argument("--window-size=1920,1080")
+    options = webdriver.ChromeOptions()
+    options.add_argument("--window-size=1920,1080")
     if selenoid:
         capabilities = {
             'browserName': 'chrome',
@@ -66,3 +67,7 @@ def navbar_page(driver):
     driver.get(NavbarPage.url)
     return NavbarPage(driver=driver)
 
+@pytest.fixture
+def pixel_page(driver):
+    driver.get(PixelPage.url)
+    return PixelPage(driver=driver)

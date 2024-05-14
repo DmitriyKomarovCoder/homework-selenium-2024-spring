@@ -25,5 +25,6 @@ class LoginPage(BasePage):
         password_input.send_keys(password)
         time.sleep(4)
 
-        password_input.send_keys(Keys.ENTER)
-        # self.click(self.locators.SUBMIT_BUTTON, 5)        
+        # password_input.send_keys(Keys.ENTER)
+        self.click(self.locators.SUBMIT_BUTTON)
+        time.sleep(4)
