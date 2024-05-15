@@ -39,11 +39,11 @@ class SettingsPage(BasePage):
     def click_save(self):
         self.click(self.locators.subbmit_button())
     
-    def is_languegue_changed(self):
-        self.find()
-    
     def click_my_target(self):
         self.click(self.locators.my_taget_button())
     
     def is_popup_displayed(self):
         return self.find(self.locators.button_import_countinue())
+    
+    def click_telegram(self):
+        self.click(self.locators.telegram_button())
