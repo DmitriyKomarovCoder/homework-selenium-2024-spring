@@ -4,9 +4,12 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
-from ui.pages.base_page import BasePage
-from ui.pages.news_page import NewsPage
+from hw.code.ui.pages.base_page import BasePage
+from hw.code.ui.pages.news_page import NewsPage
+from hw.code.ui.pages.settings_page import SettingsPage
 
+from dotenv import load_dotenv
+import os
 
 @pytest.fixture()
 def driver(config):
@@ -30,9 +33,9 @@ def driver(config):
             desired_capabilities=capabilities
         )
     elif browser == 'chrome':
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
     elif browser == 'firefox':
-        driver = webdriver.Firefox()
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     else:
         raise RuntimeError(f'Unsupported browser: "{browser}"')
     driver.get(url)
@@ -43,7 +46,7 @@ def driver(config):
 
 def get_driver(browser_name):
     if browser_name == 'chrome':
-        browser = webdriver.Chrome()
+        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
     elif browser_name == 'firefox':
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     else:
@@ -61,6 +64,12 @@ def all_drivers(config, request):
     browser.quit()
 
 
+@pytest.fixture(scope='session')
+def credentials():
+    load_dotenv()
+    user = os.getenv('EMAIL')
+    password = os.getenv('PASSWORD')
+    return user, password
 @pytest.fixture
 def base_page(driver):
     return BasePage(driver=driver)
@@ -69,3 +78,7 @@ def base_page(driver):
 @pytest.fixture
 def news_page(driver):
     return NewsPage(driver=driver)
+
+@pytest.fixture
+def settings_page(driver):
+    return SettingsPage(driver=driver)

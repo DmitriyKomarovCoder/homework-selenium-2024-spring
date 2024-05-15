@@ -1,40 +1,37 @@
+import time
+
 from base_case import BaseCase
 
-from ui.fixtures import news_page
+from hw.code.ui.fixtures import news_page
 
 import pytest
 
+
 class TestNewsPage(BaseCase):
     authorize = False
-    
+
     def test_redirect_on_news(self, news_page):
         news_page.click_navbar_news()
+        time.sleep(3)
         assert self.is_opened('https://ads.vk.com/news')
-    
-    def first_article_latest(self, news_page):
-        news_page.click_navbar_news()
-        
-        
-        
-    @pytest.mark.skip
-    def test_slide_click(self, main_page):
-        initial_title = main_page.get_slide_title()
-        main_page.change_slide()
-        assert initial_title != main_page.get_slide_title()
-    
-    @pytest.mark.skip
-    def test_case_company_get_all(self, main_page):
-        main_page.click_get_all()
-        assert self.is_opened("https://ads.vk.com/cases")
 
-    @pytest.mark.skip
-    def test_case_company(self, main_page):
-        case_title = main_page.get_title_text()
-        main_page.click_case_href()
-        case_summary = main_page.get_title_case_summary()
-        assert case_title == case_summary
-    
-    @pytest.mark.skip
-    def test_webinar(self, main_page):
-        main_page.click_more_info()
-        assert self.is_opened("https://ads.vk.com/events")
+    def test_first_article_latest(self, news_page):
+        news_page.click_navbar_news()
+        article_time = news_page.get_article_time()
+        news_page.open_article()
+        assert article_time == news_page.get_article_time()
+
+    def test_articles_time_range_asc(self, news_page):
+        news_page.click_navbar_news()
+        published = news_page.get_time_slice()
+
+        assert all(published[i] <= published[i+1] for i in range(len(published) - 1))
+
+    def test_article_redirect_to_lk(self, news_page):
+        news_page.click_navbar_news()
+        news_page.open_article()
+
+        news_page.open_lk()
+        news_page.go_to_new_tab()
+
+        assert self.is_opened('https://id.vk.com/auth?')

@@ -1,7 +1,7 @@
 import pytest
 import os
-from ui.locators.ads_locators import LoginPageLocators
-from ui.pages.base_page import BasePage
+from hw.code.ui.locators.ads_locators import LoginPageLocators
+from hw.code.ui.pages.base_page import BasePage
 import time
 from selenium.webdriver.common.keys import Keys
 

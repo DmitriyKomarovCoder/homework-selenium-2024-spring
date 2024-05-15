@@ -1,6 +1,6 @@
 import pytest
 from _pytest.fixtures import FixtureRequest
-from ui.pages.base_page import PageNotOpenedExeption
+from ui.pages.base_page import PageNotOpenedException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from ui.pages.login_page import LoginPage
