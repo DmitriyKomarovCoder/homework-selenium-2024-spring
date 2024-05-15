@@ -42,10 +42,24 @@ class PixelPage(BasePage):
         self.click(self.locators.CLOSE_FRAME)
 
     def click_more(self):
-        self.click(self.locators.BUTTON_MORE)
+        #self.hover_elem(self.locators.TABLE_DOMAIN_ELEMENT)
+        self.scroll_and_click(self.locators.BUTTON_MORE)
+
+    def click_update_frame(self):
+        self.click(self.locators.BUTTON_UPDATE_DROPDOWN)
+
+    def click_update(self):
+        self.click(self.locators.BUTTON_UPDATE)
+
+    def input_update_name(self):
+        return self.find(self.locators.BUTTON_INPUT_UPDATE)
+
+    def open_update_frame(self):
+        self.click_more()
+        self.click_update_frame()
 
     def open_delete_frame(self):
-        self.scroll_and_click(self.locators.BUTTON_MORE)
+        self.click_more()
         self.click(self.locators.BUTTON_DELETE_DROPDOWN)
 
     def click_delete(self):
@@ -62,9 +76,24 @@ class PixelPage(BasePage):
         self.click_button_create_pixel()
         self.click_close_pixel()
 
+    def find_nothind_pixel_text(self):
+        return self.find(self.locators.NOTHING_PIXEL_TEXT).text
+
     def delete_pixel(self):
         self.open_delete_frame()
         self.click_delete()
 
     def find_domain(self, domain_name):
-        return self.locators.find_element(domain_name)
+        return self.find(self.locators.find_element(domain_name))
+    
+    def find_update_text(self):
+        return self.find(self.locators.UPDATE_TEXT).text
+    
+    def find_nothing_text(self):
+        return self.find(self.locators.NOTHING_FIND_TEXT).text
+    
+    def find_correct_text(self):
+        return self.find(self.locators.FIND_TEXT).text
+
+    def find_search_input(self):
+        return self.find(self.locators.INPUT_SEARCH)

@@ -52,3 +52,13 @@ class BasePage(object):
     def scroll_and_click(self, locator, timeout=None) -> WebElement:
         elem = self.wait(timeout).until(EC.presence_of_element_located(locator))
         ActionChains(self.driver).move_to_element(elem).click(elem).perform()
+    
+    # def hover_elem(self, locator):
+    #     elem = self.find(locator)
+    #     ActionChains(self.driver).move_to_element(elem).perform()
+    
+    # def hover_elem_center(self, locator):
+    #     elem = self.find(locator)
+    #     size = elem.size
+    #     width, height = size['width'], size['height']
+    #     ActionChains(self.driver).move_to_element_with_offset(elem, width / 2, height / 2).perform()

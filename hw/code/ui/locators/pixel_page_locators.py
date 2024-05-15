@@ -18,10 +18,15 @@ class PixelPageLocators:
     CREATE_ID_PIXEL_TEXT = (By.XPATH, '//h2[text()="Создан ID пикселя"]')
     CLOSE_FRAME = (By.XPATH, '//div[@aria-label="Закрыть"]')
 
-    BUTTON_MORE = (By.XPATH, '//button[@arial-label="More"]')
-    BUTTON_DELETE_DROPDOWN = (By.XPATH, '//div[contains(@class, "ContextMenu_dropdown__")]//label[1]')
-    BUTTON_DELETE = (By.XPATH, '//div[@class="vkuiButtonGroup"]//button[1]')
-    
-    @staticmethod
-    def find_element(item_text):
-        return By.XPATH, f"//*[text()='{item_text}']"
+    BUTTON_MORE = (By.XPATH, '//button[@aria-label="More"]')
+    TABLE_DOMAIN_ELEMENT = (By.XPATH, "//div[contains(@class, 'BaseTable__row-cell') and contains(@style, 'width: 50px')]")
+    BUTTON_DELETE_DROPDOWN = (By.XPATH, '//div[contains(@class, "ContextMenu_dropdown__")]//label[last()]')
+    BUTTON_UPDATE_DROPDOWN = (By.XPATH, '//div[contains(@class, "ContextMenu_dropdown__")]//label[1]')
+    BUTTON_DELETE = (By.XPATH, '//div[contains(@class, "vkuiButtonGroup")]//button[last()]')
+    BUTTON_UPDATE = (By.XPATH, '//button[@data-testid="submit"]')
+    BUTTON_INPUT_UPDATE = (By.XPATH, '//input[@name="name"]')
+    UPDATE_TEXT = (By.XPATH, '//div[@class="vkuiSimpleCell__content"]//span')
+    NOTHING_PIXEL_TEXT = (By.XPATH, '//h2[text()="Нет привязанных пикселей трекинга"]')
+    NOTHING_FIND_TEXT = (By.XPATH, '//h2[text()="Ничего не найдено"]')
+    FIND_TEXT = (By.XPATH, '//h2[text()="Example Domain"]')
+    INPUT_SEARCH = (By.XPATH, '//input[@placeholder="Поиск"]')
