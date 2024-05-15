@@ -1,7 +1,7 @@
 import time
 
-from hw.code.ui.pages.base_page import BasePage
-from hw.code.ui.locators.ads_locators import NewsPageLocators
+from ui.pages.base_page import BasePage
+from ui.locators.ads_locators import NewsPageLocators
 
 
 class NewsPage(BasePage):

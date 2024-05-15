@@ -4,9 +4,9 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
-from hw.code.ui.pages.base_page import BasePage
-from hw.code.ui.pages.news_page import NewsPage
-from hw.code.ui.pages.settings_page import SettingsPage
+from ui.pages.base_page import BasePage
+from ui.pages.news_page import NewsPage
+from ui.pages.settings_page import SettingsPage
 
 from dotenv import load_dotenv
 import os
