@@ -1,8 +1,10 @@
 import pytest
 import os
-from ui.locators.ads_locators import LoginPageLocators
-from ui.pages.base_page import BasePage
 import time
+
+from ui.locators.login_page_locators import LoginPageLocators
+from ui.pages.base_page import BasePage
+
 from selenium.webdriver.common.keys import Keys
 
 class LoginPage(BasePage):
@@ -25,5 +27,6 @@ class LoginPage(BasePage):
         password_input.send_keys(password)
         time.sleep(4)
 
-        password_input.send_keys(Keys.ENTER)
-        # self.click(self.locators.SUBMIT_BUTTON, 5)        
+        # password_input.send_keys(Keys.ENTER)
+        self.click(self.locators.SUBMIT_BUTTON)
+        time.sleep(4)

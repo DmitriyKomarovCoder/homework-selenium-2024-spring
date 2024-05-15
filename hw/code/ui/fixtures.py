@@ -5,6 +5,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
 from ui.pages.base_page import BasePage
+from ui.pages.main_page import MainPage
+from ui.pages.navbar_page import NavbarPage
+from ui.pages.pixel_page import PixelPage
 from ui.pages.news_page import NewsPage
 from ui.pages.settings_page import SettingsPage
 
@@ -43,7 +46,6 @@ def driver(config):
     yield driver
     driver.quit()
 
-
 def get_driver(browser_name):
     if browser_name == 'chrome':
         browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
@@ -63,13 +65,13 @@ def all_drivers(config, request):
     yield browser
     browser.quit()
 
-
 @pytest.fixture(scope='session')
 def credentials():
     load_dotenv()
     user = os.getenv('EMAIL')
     password = os.getenv('PASSWORD')
     return user, password
+
 @pytest.fixture
 def base_page(driver):
     return BasePage(driver=driver)
@@ -82,3 +84,18 @@ def news_page(driver):
 @pytest.fixture
 def settings_page(driver):
     return SettingsPage(driver=driver)
+
+@pytest.fixture
+def main_page(driver):
+    return MainPage(driver=driver)
+
+@pytest.fixture
+def navbar_page(driver):
+    driver.get(NavbarPage.url)
+    return NavbarPage(driver=driver)
+
+@pytest.fixture
+def pixel_page(driver):
+    driver.get(PixelPage.url)
+    return PixelPage(driver=driver)
+
