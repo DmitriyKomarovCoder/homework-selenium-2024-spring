@@ -1,8 +1,10 @@
 import pytest
 import os
+import time
+
 from ui.locators.login_page_locators import LoginPageLocators
 from ui.pages.base_page import BasePage
-import time
+
 from selenium.webdriver.common.keys import Keys
 
 class LoginPage(BasePage):

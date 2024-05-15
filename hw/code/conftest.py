@@ -14,6 +14,7 @@ def config(request):
     browser = request.config.getoption('--browser')
     url = request.config.getoption('--url')
     debug_log = request.config.getoption('--debug_log')
+    
     if request.config.getoption('--selenoid'):
         if request.config.getoption('--vnc'):
             vnc = True
