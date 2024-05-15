@@ -58,14 +58,16 @@ class TestSettingsPage(BaseCase):
         
         settings_page.change_languegue()
         
+        settings_page.click_save()
+        
         assert settings_page.is_input_error()
         
         
     @pytest.mark.parametrize(
     'email, result',
         [
-            ("", 0),
-            ("aaa", 0),
+            ("", None),
+            ("aaa", None),
             ("a@a.ru", 1),
         ]
     )
@@ -85,3 +87,26 @@ class TestSettingsPage(BaseCase):
         
         assert settings_page.is_popup_displayed() != None
     
+    def test_telegram_redirect(self, settings_page):
+        settings_page.click_settings_button()
+        
+        settings_page.click_settings_item("Уведомления")
+        
+        settings_page.click_telegram()
+        
+        settings_page.go_to_new_tab()
+        
+        assert self.is_opened('https://t.me/vkadssenderbot')
+    
+    def test_checkbox_update(self, settings_page):
+        settings_page.click_settings_button()
+        
+        settings_page.click_checkbox_item("Финансы")
+        settings_page.click_checkbox_item("Изменения в API")
+        settings_page.click_checkbox_item("Мероприятия")
+        settings_page.click_checkbox_item("Новости")
+        
+        settings_page.click_save()
+        
+        assert settings_page.is_input_error() == None
+        

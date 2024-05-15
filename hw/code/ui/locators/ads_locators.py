@@ -70,3 +70,7 @@ class SettingsPageLocators():
     @staticmethod
     def button_import_countinue():
         return By.XPATH, f'//button[@data-testid="import-continue"]'
+
+    @staticmethod
+    def telegram_button():
+        return By.XPATH, f'//*[contains(@class, "vkuiButton")]//*[text()="Подключить"]'
