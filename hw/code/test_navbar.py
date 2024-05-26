@@ -17,3 +17,4 @@ class TestNavbarPage(BaseCase):
     def test_navbar_href(self, navbar_page, text, href):
         navbar_page.click_navbar_item(text)
         assert self.is_opened(href)
+        assert self.find(navbar_page.locators_main.SUMMARY_TEXT).text != ""

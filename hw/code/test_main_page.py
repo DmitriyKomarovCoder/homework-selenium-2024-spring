@@ -13,7 +13,9 @@ class TestMainPage(BaseCase):
     @pytest.mark.skip
     def test_case_company_get_all(self, main_page):
         main_page.click_get_all()
+        check_text = main_page.find_text_offerContent()
         assert self.is_opened("https://ads.vk.com/cases")
+        assert check_text != ""
 
     @pytest.mark.skip
     def test_case_company(self, main_page):
@@ -25,4 +27,6 @@ class TestMainPage(BaseCase):
     @pytest.mark.skip
     def test_webinar(self, main_page):
         main_page.click_more_info()
+        case_summary = main_page.find_text_summary_title()
         assert self.is_opened("https://ads.vk.com/events")
+        assert case_summary != ""

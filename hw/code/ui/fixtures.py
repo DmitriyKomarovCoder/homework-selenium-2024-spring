@@ -7,6 +7,7 @@ from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
 from ui.pages.navbar_page import NavbarPage
 from ui.pages.pixel_page import PixelPage
+from ui.pages.lead_page import LeadPage
 # from ui.pages.settings_page import SettingsPage
 from dotenv import load_dotenv
 import os
@@ -71,3 +72,8 @@ def navbar_page(driver):
 def pixel_page(driver):
     driver.get(PixelPage.url)
     return PixelPage(driver=driver)
+
+@pytest.fixture
+def lead_page(driver):
+    driver.get(LeadPage.url)
+    return LeadPage(driver=driver)
