@@ -4,15 +4,15 @@ class LeadPageLocators:
     BUTTON_CREATE = (By.XPATH, '//button[@test-id="create-leadform-button"]')
     DOWNLOAD_LOGO = (By.XPATH, '//div[@data-testid="set-global-image"]')
     GET_LOGO = (By.XPATH, '//div[contains(@class, "ImageItems_image__")]')
-    CHANGE_IMAGE = (By.XPATH, '//button[@class="change-image"]')
+    CHANGE_IMAGE = (By.XPATH, '//button[@data-testid="change-image"]')
 
     @staticmethod
     def BUTTON_STYLE(style_id):
-        return By.XPATH, f"//div[@data-id='{style_id}']"
+        return By.XPATH, f"//div[@data-id='{style_id}']" # 0-2-3-4-5-6-1
     
     @staticmethod
     def CHECK_STYLE(gradient_style):
-        return By.XPATH, f"//div[contains(@class, LeadForm-module_gradient'{gradient_style}')]" # 1-6
+        return By.XPATH, f"//div[contains(@class, LeadForm-module_gradient{gradient_style})]" # 0-2-3-4-5-6-1
     
     GET_PREVIEW_LIGHT = (By.XPATH, '//div[contains(@class, "vkui--vkBase--light")]')
     GET_PREVIEW_DARK = (By.XPATH, '//div[contains(@class, "vkui--vkBase--dark")]')
@@ -29,13 +29,14 @@ class LeadPageLocators:
     INPUT_DESCRIPTION = (By.XPATH, '//input[@placeholder="Краткое описание опроса"]') 
 
     BUTTON_CONTINUE = (By.XPATH, '//button[@data-testid="submit"]')
+    BUTTON_CANCEL = (By.XPATH, '//button[@data-testid="cancel"]')
 
     BUTTON_ADD_CONTACT = (By.XPATH, '//button[contains(@class, "Questions_addContactFieldsBtn__")]')
     CHECKBOX_EMAIL = (By.XPATH, '//div[contains(@class, "AddContactsFieldsModal_checklist__")]//label[2]')
     ADD_BUTTON_CONTACT_INFO = (By.XPATH, '//div[contains(@class, "ModalManagerPage_footer__")]//button')
-    FIND_EMAIL_CONTACT_INFO = (By.XPATH, '//input[@placeholder="Email"]')
+    FIND_EMAIL_CONTACT_INFO = (By.XPATH, '//input[@placeholder="Введите email"]')
 
-    BUTTON_ADD_QUESTION = (By.XPATH, '//button//span//span[text()="Добавить вопрос"]')
+    BUTTON_ADD_QUESTION = (By.XPATH, '//button[.//span[text()="Добавить вопрос"]]')
 
     QUESTION_TEXTAREA = (By.XPATH, '//textarea[contains(@class, "vkuiTextarea__")]')
     

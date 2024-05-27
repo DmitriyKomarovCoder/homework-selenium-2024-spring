@@ -15,7 +15,7 @@ class LeadPage(BasePage):
         self.click(self.locators.GET_LOGO)
     
     def find_replace(self):
-        return self.find(self.locators.CHANGE_IMAGE)
+        return self.find(self.locators.CHANGE_IMAGE, 7)
     
     def change_style(self, item):
         self.click(self.locators.BUTTON_STYLE(item))
@@ -26,11 +26,16 @@ class LeadPage(BasePage):
     def slide_button(self, locator):
         input = self.find(locator)
         input.send_keys(Keys.RIGHT)
-        
+    
+    def click_continue(self):
+        self.click(self.locators.BUTTON_CONTINUE)
+
     def decor_part(self, name_lead):
         # Оформление
         self.download_logo()
         in_name_lead = self.find(self.locators.INPUT_NAME_LEAD_FORM)
+
+        in_name_lead.clear()
         in_name_lead.send_keys(name_lead)
 
         in_name_company = self.find(self.locators.INPUT_NAME_COMPANY)
@@ -41,8 +46,8 @@ class LeadPage(BasePage):
 
         in_description = self.find(self.locators.INPUT_DESCRIPTION)
         in_description.send_keys(name_lead)
-
-        self.click(self.locators.BUTTON_CONTINUE)
+        self.find_replace()
+        self.click_continue()
         # Оформление
 
     def create_lead_form(self, name_lead):
@@ -51,10 +56,10 @@ class LeadPage(BasePage):
         self.decor_part(name_lead)
         
         # Вопросы
-        self.click(self.locators.BUTTON_CONTINUE)
+        self.click_continue()
         # Результаты
 
-        self.click(self.locators.BUTTON_CONTINUE)
+        self.click_continue()
         # Настройки
         in_last_name = self.find(self.locators.INPUT_LAST_NAME)
         in_last_name.send_keys(name_lead)
@@ -62,7 +67,7 @@ class LeadPage(BasePage):
         in_last_name = self.find(self.locators.INPUT_ADDRESS)
         in_last_name.send_keys(name_lead)
 
-        self.click(self.locators.BUTTON_CONTINUE)
+        self.click_continue()
 
 
     def add_contact_info(self):
@@ -81,10 +86,10 @@ class LeadPage(BasePage):
 
         textarea_question = self.find(self.locators.QUESTION_TEXTAREA)
         textarea_question.send_keys(question_name)
-    
+
     def find_title_question(self, question_name):
-        return self.find(self.locators.TITLE_QUESTION(question_name))
-    
+        return self.find(self.locators.TITLE_QUESTION(question_name)).text
+
     def click_add_site(self):
         self.click(self.locators.BUTTON_ADD_SITE)
 
@@ -94,14 +99,14 @@ class LeadPage(BasePage):
     def click_promo(self):
         self.click(self.locators.BUTTON_ADD_PROMO_CODE)
     
-    def find_input_site(self):
-        return self.find(self.locators.INPUT_SITE)
+    def input_site_visible(self):
+        self.find(self.locators.INPUT_SITE).send_keys("example.com")
     
-    def find_input_phone(self):
-        return self.find(self.locators.INPUT_PHONE)
+    def input_phone_visible(self):
+        self.find(self.locators.INPUT_PHONE).send_keys("99999")
     
-    def find_input_promocode(self):
-        return self.find(self.locators.INPUT_PROMOCODE)
+    def input_promocode_visible(self):
+        self.find(self.locators.INPUT_PROMOCODE).send_keys("a")
     
     def find_lead_phone(self):
         return self.find(self.locators.LEAD_PHONE).text
@@ -134,3 +139,20 @@ class LeadPage(BasePage):
     def find_input_search(self):
         return self.find(self.locators.INPUT_SEARCH)
     
+    def skip_to_question(self, name_lead):
+        self.click_create_lead()
+        self.decor_part(name_lead)        
+
+    def skip_to_result(self, name_lead):
+        self.click_create_lead()
+        self.decor_part(name_lead)
+        self.click_continue()
+    
+    def skip_to_settings(self, name_lead):
+        self.click_create_lead()
+        self.decor_part(name_lead)
+        self.click_continue()
+        self.click_continue()
+    
+    def click_close(self):
+        self.click(self.locators.BUTTON_CANCEL)

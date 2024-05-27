@@ -1,14 +1,19 @@
 import time
 
 import allure
-from selenium.common import TimeoutException
-from selenium.webdriver.common.action_chains import ActionChains
+
+from ui.locators import basic_locators
+
 from selenium.webdriver.remote.webelement import WebElement
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# from ui.locators.base_page_locators import BasePageLocators
+from selenium.common import TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
+# from ui.locators.base_page_locators import BasePageLocators
 
 class PageNotOpenedException(Exception):
     pass
@@ -38,6 +43,14 @@ class BasePage(object):
     def finds(self, locator, timeout=None):
         return self.wait(timeout).until(EC.visibility_of_all_elements_located(locator))
 
+    @allure.step('Search')
+    def search(self, query):
+        elem = self.find(self.locators.QUERY_LOCATOR_ID)
+        elem.send_keys(query)
+        go_button = self.find(self.locators.GO_BUTTON_LOCATOR)
+        go_button.click()
+        self.my_assert()
+
     @allure.step("Step 1")
     def my_assert(self):
         assert 1 == 1
@@ -49,10 +62,27 @@ class BasePage(object):
         elem = self.wait(timeout).until(EC.element_to_be_clickable(locator))
         elem.click()
 
+
+    def scroll(self):
+        actions = ActionChains(self.driver, duration=500)
+        actions.send_keys(Keys.END).perform()
+
+    def go_to_new_tab(self):
+        handles = self.driver.window_handles
+        assert len(handles) > 1
+        self.driver.switch_to.window(handles[1])
+       
     def scroll_and_click(self, locator, timeout=None) -> WebElement:
         elem = self.wait(timeout).until(EC.presence_of_element_located(locator))
         ActionChains(self.driver).move_to_element(elem).click(elem).perform()
     
+    
+    def is_element_not_present(self, locator, timeout=None):
+        try:
+            return self.wait(timeout).until(EC.invisibility_of_element_located(locator))
+        except TimeoutException:
+            return False
+
     # def hover_elem(self, locator):
     #     elem = self.find(locator)
     #     ActionChains(self.driver).move_to_element(elem).perform()
@@ -62,3 +92,4 @@ class BasePage(object):
     #     size = elem.size
     #     width, height = size['width'], size['height']
     #     ActionChains(self.driver).move_to_element_with_offset(elem, width / 2, height / 2).perform()
+

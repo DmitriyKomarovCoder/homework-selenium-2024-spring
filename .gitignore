@@ -1,6 +1,8 @@
-test-env
 __pycache__
 .pytest_cache
+log
+qa_hw_venv
+test-env
 .env
 .idea
 myenv
