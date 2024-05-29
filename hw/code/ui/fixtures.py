@@ -10,6 +10,7 @@ from ui.pages.navbar_page import NavbarPage
 from ui.pages.pixel_page import PixelPage
 from ui.pages.news_page import NewsPage
 from ui.pages.settings_page import SettingsPage
+from ui.pages.survey_page import SurveyPage
 
 from dotenv import load_dotenv
 import os
@@ -36,9 +37,9 @@ def driver(config):
             desired_capabilities=capabilities
         )
     elif browser == 'chrome':
-        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        driver = webdriver.Chrome()
     elif browser == 'firefox':
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        driver = webdriver.Firefox()
     else:
         raise RuntimeError(f'Unsupported browser: "{browser}"')
     driver.get(url)
@@ -98,4 +99,9 @@ def navbar_page(driver):
 def pixel_page(driver):
     driver.get(PixelPage.url)
     return PixelPage(driver=driver)
+
+@pytest.fixture
+def survey_page(driver):
+    driver.get(SurveyPage.url)
+    return SurveyPage(driver=driver)
 
