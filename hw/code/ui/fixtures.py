@@ -8,6 +8,8 @@ from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
 from ui.pages.navbar_page import NavbarPage
 from ui.pages.pixel_page import PixelPage
+from ui.pages.lead_page import LeadPage
+# from ui.pages.settings_page import SettingsPage
 from ui.pages.news_page import NewsPage
 from ui.pages.settings_page import SettingsPage
 from ui.pages.survey_page import SurveyPage
@@ -49,9 +51,9 @@ def driver(config):
 
 def get_driver(browser_name):
     if browser_name == 'chrome':
-        browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        browser = webdriver.Chrome()
     elif browser_name == 'firefox':
-        browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        browser = webdriver.Firefox()
     else:
         raise RuntimeError(f'Unsupported browser: "{browser_name}"')
     browser.maximize_window()
@@ -105,3 +107,7 @@ def survey_page(driver):
     driver.get(SurveyPage.url)
     return SurveyPage(driver=driver)
 
+
+def lead_page(driver):
+    driver.get(LeadPage.url)
+    return LeadPage(driver=driver)

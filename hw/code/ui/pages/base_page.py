@@ -79,9 +79,21 @@ class BasePage(object):
     def hover_elem(self, locator):
         elem = self.find(locator)
         ActionChains(self.driver).move_to_element(elem).perform()
+    
+    
+    def is_element_not_present(self, locator, timeout=None):
+        try:
+            return self.wait(timeout).until(EC.invisibility_of_element_located(locator))
+        except TimeoutException:
+            return False
 
+    # def hover_elem(self, locator):
+    #     elem = self.find(locator)
+    #     ActionChains(self.driver).move_to_element(elem).perform()
+    
     # def hover_elem_center(self, locator):
     #     elem = self.find(locator)
     #     size = elem.size
     #     width, height = size['width'], size['height']
     #     ActionChains(self.driver).move_to_element_with_offset(elem, width / 2, height / 2).perform()
+
