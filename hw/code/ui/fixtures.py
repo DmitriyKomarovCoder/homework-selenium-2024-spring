@@ -12,6 +12,7 @@ from ui.pages.lead_page import LeadPage
 # from ui.pages.settings_page import SettingsPage
 from ui.pages.news_page import NewsPage
 from ui.pages.settings_page import SettingsPage
+from ui.pages.survey_page import SurveyPage
 
 from dotenv import load_dotenv
 import os
@@ -102,6 +103,11 @@ def pixel_page(driver):
     return PixelPage(driver=driver)
 
 @pytest.fixture
+def survey_page(driver):
+    driver.get(SurveyPage.url)
+    return SurveyPage(driver=driver)
+
+
 def lead_page(driver):
     driver.get(LeadPage.url)
     return LeadPage(driver=driver)
